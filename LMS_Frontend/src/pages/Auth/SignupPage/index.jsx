@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../../services/authService";
 import styles from "./SignUpPage.module.css";
-import logo from "../../../assets/images/logo.jpg";
-import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaUser, FaEye, FaEyeSlash } from "react-icons/fa"; // أضفت FaEye و FaEyeSlash
 import { FcGoogle } from "react-icons/fc";
 
 function SignUpPage() {
@@ -13,6 +12,7 @@ function SignUpPage() {
     password: "",
   });
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // حالة رؤية كلمة السر
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -22,14 +22,19 @@ function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
     try {
       const data = await register(formData);
-      localStorage.setItem("token", data.token);
+
       localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
+      const backendMessage =
+        err?.response?.data?.error ||
+        err?.response?.data?.message ||
+        err?.message ||
+        "Registration failed";
+
+      setError(backendMessage);
     }
   };
 
@@ -39,8 +44,8 @@ function SignUpPage() {
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <img src={logo} alt="Logo" className={styles.logo} />
+      <form onSubmit={handleSubmit} className={styles.form} noValidate>
+        <img src="public/images/logo2.png" alt="Logo" className={styles.logo} />
         <h2>Sign Up</h2>
 
         <div className={styles.inputGroup}>
@@ -67,23 +72,34 @@ function SignUpPage() {
           />
         </div>
 
-        <div className={styles.inputGroup}>
+        <div className={styles.inputGroup} style={{ position: "relative" }}>
           <FaLock className={styles.icon} />
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
             required
           />
-        </div>
+          {/* أيقونة تبديل رؤية كلمة السر */}
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            className={styles.togglePasswordIcon}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </span>
 
-        {error && <p className={styles.error}>{error}</p>}
+          <small className={styles.passwordHint}>
+            Password must contain uppercase, lowercase, number, and special
+            character.
+          </small>
+        </div>
 
         <button type="submit" className={styles.submitButton}>
           Sign Up
         </button>
+        {error && <p className={styles.error}>{error}</p>}
 
         <div className={styles.divider}>or</div>
 

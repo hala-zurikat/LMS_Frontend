@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react"; // ✅ أضفنا StrictMode هنا
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./routes/App";
 
