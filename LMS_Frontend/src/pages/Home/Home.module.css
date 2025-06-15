@@ -1,0 +1,92 @@
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  height: 100vh;
+  background-color: #f0f8ff;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.content {
+  max-width: 50%;
+}
+
+.title {
+  font-size: 48px;
+  color: #2b2d42;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 20px;
+  color: #4a4a4a;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btnLogin,
+.btnSignup {
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btnLogin {
+  background-color: #007bff;
+  color: white;
+}
+
+.btnSignup {
+  background-color: #28a745;
+  color: white;
+}
+
+.btnLogin:hover {
+  background-color: #0056b3;
+}
+
+.btnSignup:hover {
+  background-color: #1e7e34;
+}
+
+.imageContainer {
+  max-width: 45%;
+}
+
+.hero {
+  width: 100%;
+  height: auto;
+}
+.cursor {
+  display: inline-block;
+  width: 2px;
+  background-color: #007bff; /* لون أزرق */
+  margin-left: 3px;
+  animation: blink 1s step-start infinite;
+  box-shadow: 0 0 5px 2px #007bff;
+  height: 1em;
+  vertical-align: bottom;
+}
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.title {
+  /* أضف هذه لو حابب إضاءة إضافية للنص */
+  text-shadow: 0 0 8px #007bff88;
+}

@@ -1,0 +1,112 @@
+/* src/components/Navbar/Navbar.module.css */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2196f3;
+  padding: 10px 20px;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logoContainer {
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 40px;
+  cursor: pointer;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.navLinks li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.navLinks li a:hover {
+  color: #ffeb3b;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.searchInput {
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  width: 180px;
+  transition: width 0.3s ease;
+}
+
+.searchInput:focus {
+  width: 250px;
+}
+
+.searchButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.searchButton:hover {
+  color: #ffeb3b;
+}
+
+.authButtons {
+  display: flex;
+  gap: 15px;
+}
+
+.btnLogin,
+.btnRegister {
+  padding: 7px 15px;
+  border-radius: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btnLogin {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btnLogin:hover {
+  background-color: white;
+  color: #2196f3;
+}
+
+.btnRegister {
+  background-color: #ffeb3b;
+  color: #2196f3;
+  border: none;
+}
+
+.btnRegister:hover {
+  background-color: #f7d600;
+}
