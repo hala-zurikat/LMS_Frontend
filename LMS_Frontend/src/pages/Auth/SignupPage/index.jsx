@@ -4,6 +4,7 @@ import { register } from "../../../services/authService";
 import styles from "./SignUpPage.module.css";
 import { FaEnvelope, FaLock, FaUser, FaEye, FaEyeSlash } from "react-icons/fa"; // أضفت FaEye و FaEyeSlash
 import { FcGoogle } from "react-icons/fc";
+import logo from "../../../assets/images/logo2.png";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -45,7 +46,7 @@ function SignUpPage() {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
-        <img src="public/images/logo2.png" alt="Logo" className={styles.logo} />
+        <img src={logo} alt="Logo" className={styles.logo} />
         <h2>Sign Up</h2>
 
         <div className={styles.inputGroup}>

@@ -4,26 +4,57 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #2196f3;
+  background-color: #0d47a1;
   padding: 10px 20px;
   color: white;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
 }
 
 .logoContainer {
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .logo {
   height: 40px;
   cursor: pointer;
+  border-radius: 25px;
+}
+
+.brandName {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+  color: white;
+}
+
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.navLinksContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .navLinks {
   list-style: none;
   display: flex;
-  gap: 25px;
+  gap: 70px;
   margin: 0;
   padding: 0;
   flex-grow: 1;
@@ -75,38 +106,39 @@
   color: #ffeb3b;
 }
 
-.authButtons {
-  display: flex;
-  gap: 15px;
-}
+/* ريسبونسيف */
+@media (max-width: 768px) {
+  .menuToggle {
+    display: block;
+  }
 
-.btnLogin,
-.btnRegister {
-  padding: 7px 15px;
-  border-radius: 20px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+  .navLinksContainer {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 10px;
+  }
 
-.btnLogin {
-  background-color: transparent;
-  border: 2px solid white;
-  color: white;
-}
+  .showMenu {
+    display: flex;
+  }
 
-.btnLogin:hover {
-  background-color: white;
-  color: #2196f3;
-}
+  .navLinks {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    padding-left: 10px;
+  }
 
-.btnRegister {
-  background-color: #ffeb3b;
-  color: #2196f3;
-  border: none;
-}
+  .searchForm {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 10px;
+  }
 
-.btnRegister:hover {
-  background-color: #f7d600;
+  .searchInput {
+    width: 100%;
+    max-width: 250px;
+  }
 }
