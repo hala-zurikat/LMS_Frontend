@@ -32,9 +32,17 @@
   box-shadow: 0 0 5px rgba(217, 48, 37, 0.5);
 }
 
-h2 {
+.form h2 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  font-weight: bold;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
 }
 .togglePasswordIcon {
   position: absolute;
