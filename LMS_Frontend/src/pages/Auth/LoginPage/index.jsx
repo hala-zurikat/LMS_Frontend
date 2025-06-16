@@ -4,6 +4,7 @@ import { login } from "../../../services/authService";
 import styles from "./LoginPage.module.css";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import logo from "../../../assets/images/logo2.png";
 
 function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -24,10 +25,21 @@ function LoginPage() {
       const data = await login(formData);
 
       if (data.user) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-      }
+        console.log("✅ Logged in user:", data.user); // أضيفي هذا
 
-      navigate("/student/dashboard");
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        // 👇 التوجيه حسب الدور
+        if (data.user.role === "student") {
+          navigate("/student/dashboard");
+        } else if (data.user.role === "admin") {
+          navigate("/admin/dashboard");
+        } else if (data.user.role === "instructor") {
+          navigate("/instructor/dashboard");
+        } else {
+          navigate("/"); // fallback
+        }
+      }
     } catch (err) {
       const backendMessage =
         err?.response?.data?.error ||
@@ -46,7 +58,7 @@ function LoginPage() {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
-        <img src="public/images/logo2.png" alt="Logo" className={styles.logo} />
+        <img src={logo} alt="Logo" className={styles.logo} />
         <h2>Login</h2>
 
         <div className={styles.inputGroup}>

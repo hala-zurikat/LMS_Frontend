@@ -1,5 +1,3 @@
-// src/services/studentService.js
-
 import api from "./api"; // axios أو fetch جاهز؟
 
 export async function getStudentDashboardData() {

@@ -7,82 +7,53 @@ function Home() {
   const navigate = useNavigate();
 
   const titleText = "Welcome to EduCore 🎓";
-  const descText =
-    "EduCore is your smart learning hub for tech, business, and more";
+  const descriptions = [
+    "Your smart learning hub for tech.",
+    "Master business and leadership skills.",
+    "Explore coding, design, and beyond.",
+    "Learn anytime, anywhere with EduCore.",
+  ];
 
-  const [displayTitle, setDisplayTitle] = useState("");
   const [displayDesc, setDisplayDesc] = useState("");
-
-  const [isTypingTitle, setIsTypingTitle] = useState(true);
-  const [isTypingDesc, setIsTypingDesc] = useState(true);
-
-  const [titleIndex, setTitleIndex] = useState(0);
   const [descIndex, setDescIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(true);
 
-  // TITLE typing effect
+  // Description typing & deleting effect
   useEffect(() => {
+    const currentText = descriptions[descIndex];
     let timeout;
-    if (isTypingTitle) {
-      if (titleIndex < titleText.length) {
+
+    if (isTyping) {
+      if (charIndex < currentText.length) {
         timeout = setTimeout(() => {
-          setDisplayTitle((prev) => prev + titleText[titleIndex]);
-          setTitleIndex(titleIndex + 1);
-        }, 60); // أسرع
+          setDisplayDesc((prev) => prev + currentText[charIndex]);
+          setCharIndex((prev) => prev + 1);
+        }, 70);
       } else {
         timeout = setTimeout(() => {
-          setIsTypingTitle(false);
-        }, 800); // أقصر
+          setIsTyping(false);
+        }, 1500); // Wait before deleting
       }
     } else {
-      if (titleIndex > 0) {
+      if (charIndex > 0) {
         timeout = setTimeout(() => {
-          setDisplayTitle((prev) => prev.slice(0, -1));
-          setTitleIndex(titleIndex - 1);
-        }, 30); // أسرع مسح
+          setDisplayDesc((prev) => prev.slice(0, -1));
+          setCharIndex((prev) => prev - 1);
+        }, 30);
       } else {
-        setIsTypingTitle(true);
+        setIsTyping(true);
+        setDescIndex((prev) => (prev + 1) % descriptions.length);
       }
     }
-    return () => clearTimeout(timeout);
-  }, [titleIndex, isTypingTitle]);
 
-  // DESCRIPTION typing effect
-  useEffect(() => {
-    let timeout;
-    if (!isTypingTitle) {
-      if (isTypingDesc) {
-        if (descIndex < descText.length) {
-          timeout = setTimeout(() => {
-            setDisplayDesc((prev) => prev + descText[descIndex]);
-            setDescIndex(descIndex + 1);
-          }, 60); // أسرع
-        } else {
-          timeout = setTimeout(() => {
-            setIsTypingDesc(false);
-          }, 800); // أقصر
-        }
-      } else {
-        if (descIndex > 0) {
-          timeout = setTimeout(() => {
-            setDisplayDesc((prev) => prev.slice(0, -1));
-            setDescIndex(descIndex - 1);
-          }, 30); // أسرع مسح
-        } else {
-          setIsTypingDesc(true);
-          setIsTypingTitle(true);
-        }
-      }
-    }
     return () => clearTimeout(timeout);
-  }, [descIndex, isTypingDesc, isTypingTitle]);
+  }, [charIndex, isTyping, descIndex]);
 
   return (
     <div className={styles.home}>
       <div className={styles.content}>
-        <h1 className={styles.title}>
-          {displayTitle}
-          <span className={styles.cursor}></span>
-        </h1>
+        <h1 className={styles.title}>{titleText}</h1>
         <p className={styles.description}>
           {displayDesc}
           <span className={styles.cursor}></span>
