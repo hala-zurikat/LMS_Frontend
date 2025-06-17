@@ -15,9 +15,15 @@ export default function CourseCard({ course, onEnroll }) {
 
       <div className={styles.content}>
         <h3 className={styles.title}>{course.title}</h3>
+
+        <p className={styles.instructor}>
+          Instructor: {course.instructor_name || "Unknown"}
+        </p>
+
         <p className={styles.description}>
           {course.description?.slice(0, 100)}...
         </p>
+
         <button
           className={styles.enrollBtn}
           onClick={() => onEnroll(course.id)}

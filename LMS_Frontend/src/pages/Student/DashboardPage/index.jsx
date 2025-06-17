@@ -5,13 +5,14 @@ import { getMyEnrollments } from "../../../services/courseService";
 import useAuth from "../../../hooks/useAuth";
 
 function DashboardPage() {
-  const { user } = useAuth(); // من useAuth.js
+  const { user } = useAuth();
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await getMyEnrollments(); // من courseService.js
+        const data = await getMyEnrollments();
+        console.log("Enrolled Courses:", data);
         setCourses(data);
       } catch (err) {
         console.error("Error fetching enrollments:", err);
@@ -21,9 +22,17 @@ function DashboardPage() {
     fetchData();
   }, []);
 
+  const avatarUrl = user?.avatar
+    ? `/${user.avatar}`
+    : "/avatar/default-avatar.jpg";
+
   return (
     <div className={styles.dashboard}>
-      <h2>Welcome back, {user?.name} 👋</h2>
+      <div className={styles.headerSection}>
+        <img src={avatarUrl} alt="Profile" className={styles.avatar} />
+        <h2>Welcome back, {user?.name} 👋</h2>
+      </div>
+
       <h3>Your Enrolled Courses</h3>
       <div className={styles.coursesGrid}>
         {courses.length === 0 ? (
