@@ -6,26 +6,24 @@ import { getCategories } from "../../services/categoryService";
 import styles from "./CoursesPage.module.css";
 
 function CoursesPage() {
-  const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState([]);
-
-  const { courses, loading, error } = useCourses(searchTerm, selectedCategory);
+  const { courses, loading, error } = useCourses(selectedCategory);
 
   useEffect(() => {
     getCategories()
       .then((data) => setCategories(data))
-      .catch((err) => console.error("Failed to fetch categories:", err));
+      .catch((err) => console.error("Failed to load categories:", err));
   }, []);
 
   const handleEnroll = async (courseId) => {
     try {
       await enrollInCourse(courseId);
-      alert("✅ تم التسجيل بالكورس بنجاح!");
+      alert("✅ Successfully enrolled in the course!");
       window.location.href = "/dashboard";
     } catch (err) {
       console.error(err);
-      alert("⚠️ حدث خطأ أثناء التسجيل. قد تكون مسجل مسبقًا.");
+      alert("⚠️ Error during enrollment. You may already be enrolled.");
     }
   };
 
@@ -33,15 +31,7 @@ function CoursesPage() {
     <div className={styles.coursesPage}>
       <h1>All Courses</h1>
 
-      <form onSubmit={(e) => e.preventDefault()} className={styles.filterForm}>
-        <input
-          type="text"
-          placeholder="Search courses..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className={styles.searchInput}
-        />
-
+      <div className={styles.filterForm}>
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
@@ -54,7 +44,7 @@ function CoursesPage() {
             </option>
           ))}
         </select>
-      </form>
+      </div>
 
       {loading && <p>Loading...</p>}
       {error && <p className={styles.messageError}>{error}</p>}
@@ -62,7 +52,7 @@ function CoursesPage() {
       {!loading && !error && (
         <div className={styles.coursesGrid}>
           {courses.length === 0 ? (
-            <p>No courses found.</p>
+            <p>No matching courses found.</p>
           ) : (
             courses.map((course) => (
               <CourseCard
