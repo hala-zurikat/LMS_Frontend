@@ -15,3 +15,9 @@ export async function enrollInCourse(courseId) {
   });
   return res.data;
 }
+// Get course details with modules and lessons
+export async function getCourseDetails(courseId) {
+  const res = await fetch(`/api/courses/${courseId}/details`);
+  if (!res.ok) throw new Error("Failed to fetch course details");
+  return res.json();
+}

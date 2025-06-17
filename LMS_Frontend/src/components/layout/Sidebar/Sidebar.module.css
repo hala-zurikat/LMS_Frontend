@@ -1,0 +1,54 @@
+.sidebar {
+  position: fixed;
+  top: 60px; /* navbar height */
+  left: 0;
+  width: 180px;
+  height: calc(100vh - 60px);
+  background-color: #2e5fa5; /* blue tone */
+  color: #fff;
+  padding: 1rem;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+  z-index: 1000;
+}
+
+.closed {
+  width: 60px;
+}
+
+.toggleBtn {
+  position: absolute;
+  top: 10px;
+  right: -15px;
+  background-color: #2e5fa5;
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 1001;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

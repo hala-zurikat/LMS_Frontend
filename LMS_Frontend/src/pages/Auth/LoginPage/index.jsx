@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../../services/authService";
+import { login as loginService } from "../../../services/authService";
+import AuthContext from "../../../context/AuthContext"; // استيراد الكونتكست
 import styles from "./LoginPage.module.css";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -13,6 +14,8 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  const { login } = useContext(AuthContext); // الحصول على دالة login من الكونتكست
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -22,14 +25,13 @@ function LoginPage() {
     setError("");
 
     try {
-      const data = await login(formData);
+      const data = await loginService(formData);
 
       if (data.user) {
-        console.log("✅ Logged in user:", data.user); // أضيفي هذا
+        console.log("✅ Logged in user:", data.user);
 
-        localStorage.setItem("user", JSON.stringify(data.user));
+        login(data.user); // استدعاء دالة تسجيل الدخول من الكونتكست
 
-        // 👇 التوجيه حسب الدور
         if (data.user.role === "student") {
           navigate("/student/dashboard");
         } else if (data.user.role === "admin") {
@@ -85,10 +87,9 @@ function LoginPage() {
             required
             autoComplete="current-password"
           />
-          {/* أيقونة تبديل رؤية كلمة السر */}
           <span
             onClick={() => setShowPassword(!showPassword)}
-            className={styles.togglePasswordIcon} // استخدم هذا الكلاس من CSS module
+            className={styles.togglePasswordIcon}
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
