@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 import heroImage from "../../assets/images/h4-img-1.png";
+import AboutCard from "./components/AboutCard";
+import FeaturedCourses from "../../features/courses/components/FeaturedCourses";
+import TestimonialCard from "../../components/common/TestimonialCard/TestimonialCard";
 
 function Home() {
   const navigate = useNavigate();
@@ -74,13 +77,40 @@ function Home() {
           </button>
         </div>
       </div>
-
       <div className={styles.imageContainer}>
         <img
           src={heroImage}
           alt="Learning illustration"
           className={styles.hero}
         />
+      </div>
+
+      <div className={styles.aboutSection}>
+        <AboutCard />
+      </div>
+      <FeaturedCourses />
+      <div className={styles.testimonialsSection}>
+        <h2 className={styles.testimonialsHeading}>What People Say About Us</h2>
+        <div className={styles.testimonialsGrid}>
+          <TestimonialCard
+            name="Alice Johnson"
+            rating={5}
+            feedback="The courses are amazing and the instructors are very supportive!"
+            avatar="https://randomuser.me/api/portraits/women/44.jpg"
+          />
+          <TestimonialCard
+            name="Mohammed Al-Karaki"
+            rating={5}
+            feedback="A wonderful platform to learn new skills with practical assignments."
+            avatar="https://randomuser.me/api/portraits/men/36.jpg"
+          />
+          <TestimonialCard
+            name="Sara Omar"
+            rating={5}
+            feedback="I love how interactive and easy to follow the lessons are."
+            avatar="https://randomuser.me/api/portraits/women/65.jpg"
+          />
+        </div>
       </div>
     </div>
   );

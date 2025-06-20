@@ -5,7 +5,7 @@ import { getCourseDetails } from "../../../services/courseService";
 import styles from "./CourseDetailsPage.module.css";
 
 export default function CourseDetailsPage() {
-  const { courseId } = useParams(); // من رابط الصفحة
+  const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
 

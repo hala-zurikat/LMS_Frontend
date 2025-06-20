@@ -20,7 +20,7 @@ function CoursesPage() {
     try {
       await enrollInCourse(courseId);
       alert("✅ Successfully enrolled in the course!");
-      window.location.href = "/dashboard";
+      window.location.href = "/student/dashboard";
     } catch (err) {
       console.error(err);
       alert("⚠️ Error during enrollment. You may already be enrolled.");
