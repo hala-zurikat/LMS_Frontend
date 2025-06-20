@@ -1,0 +1,95 @@
+.courseContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+
+.courseTitle {
+  font-size: 2.5rem;
+  color: #1976d2;
+  margin-bottom: 10px;
+}
+
+.courseDescription {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.moduleBox {
+  background-color: #f9f9f9;
+  border-left: 5px solid #1976d2;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgb(25 118 210 / 0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.moduleHeader {
+  cursor: pointer;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.moduleHeader h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+  color: #1976d2;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+.lessonsList {
+  list-style-type: none;
+  padding-left: 25px;
+  padding-bottom: 15px;
+  margin: 0;
+  background-color: #e9f0fc;
+  border-top: 1px solid #ddd;
+}
+
+.lessonItem {
+  margin: 8px 0;
+  font-size: 1rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.lessonItem:hover {
+  background-color: #d0e3ff;
+}
+
+.noLessons {
+  padding: 10px;
+  color: #888;
+  font-style: italic;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #1976d2;
+  margin-top: 40px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
+}

@@ -1,5 +1,6 @@
 .home {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -74,8 +75,8 @@
   width: 100%;
   max-width: 100%;
   height: auto;
-  max-height: 400px; /* الحد الأقصى للارتفاع */
-  object-fit: contain; /* لعدم ضغط أو تشويه الصورة */
+  max-height: 400px;
+  object-fit: contain;
 }
 
 .cursor {
@@ -140,4 +141,30 @@
   .hero {
     max-height: 250px;
   }
+}
+.aboutSection {
+  margin-top: 4rem;
+  padding: 2rem 1rem;
+  background-color: #f8f9fa;
+}
+.testimonialsSection {
+  padding: 4rem 2rem;
+  background-color: #f0f8ff;
+  text-align: center;
+  max-width: 1000px;
+  margin: 4rem auto 2rem;
+}
+
+.testimonialsHeading {
+  font-size: 2rem;
+  color: #0056b3;
+  margin-bottom: 2.5rem;
+  font-weight: 700;
+}
+
+.testimonialsGrid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }

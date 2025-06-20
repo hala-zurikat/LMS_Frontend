@@ -78,3 +78,18 @@
   object-fit: cover;
   border: 2px solid #ccc;
 }
+.logoutButton {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: auto; /* ليأخذ مكانه في نهاية الهيدر */
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #c0392b;
+}
