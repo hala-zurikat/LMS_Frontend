@@ -3,6 +3,8 @@ import styles from "./DashboardPage.module.css";
 import CourseCard from "./CourseCard";
 import { getMyEnrollments } from "../../../services/courseService";
 import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import LogoutButton from "../../../components/common/LogoutButton/LogoutButton";
 
 function DashboardPage() {
   const { user } = useAuth();
@@ -18,7 +20,6 @@ function DashboardPage() {
         console.error("Error fetching enrollments:", err);
       }
     }
-
     fetchData();
   }, []);
 
@@ -31,6 +32,7 @@ function DashboardPage() {
       <div className={styles.headerSection}>
         <img src={avatarUrl} alt="Profile" className={styles.avatar} />
         <h2>Welcome back, {user?.name} 👋</h2>
+        <LogoutButton />
       </div>
 
       <h3>Your Enrolled Courses</h3>

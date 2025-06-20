@@ -5,22 +5,22 @@ import Dashboard from "../pages/Student/DashboardPage";
 import Home from "../pages/Home/Home";
 import CoursesPage from "../features/courses/CoursesPage";
 import CourseDetailsPage from "../pages/Student/CourseDetailsPage";
+import CourseContentPage from "../pages/Student/CourseContentPage/CourseContentPage.jsx";
 import MainLayout from "../components/layout/MainLayout";
-import AdminRoute from "../components/ProtectedRoutes/AdminRoute";
 import AdminDashboard from "../pages/Admin/DashboardPage/index";
-
-// أضف حماية للإنستركتور مثل AdminRoute
-import InstructorRoute from "../components/ProtectedRoutes/InstructorRoute";
 import InstructorDashboard from "../pages/Instructor/InstructorDashboardPage";
+import ContactPage from "../pages/Home/ContactMe/index";
+import RoleProtectedRoute from "../components/ProtectedRoutes/RoleProtectedRoute.jsx";
+import Unauthorized from "../pages/Error/Unauthorized.jsx";
+import ManageUsersPage from "../pages/Admin/ManageUsersPage/ManageUsers.jsx";
 
 export default function AppRouter() {
   return (
     <Routes>
-      {/* صفحات بدون layout */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
 
-      {/* صفحات داخل layout */}
+      <Route path="/unauthorized" element={<Unauthorized />} />
       <Route
         path="/"
         element={
@@ -38,10 +38,19 @@ export default function AppRouter() {
         }
       />
       <Route
-        path="/student/dashboard"
+        path="/admin/users"
+        element={
+          <RoleProtectedRoute allowedRoles={["admin"]}>
+            <ManageUsersPage />
+          </RoleProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/contact"
         element={
           <MainLayout>
-            <Dashboard />
+            <ContactPage />
           </MainLayout>
         }
       />
@@ -53,28 +62,46 @@ export default function AppRouter() {
           </MainLayout>
         }
       />
-
-      {/* صفحة الـ Admin محمية */}
+      {/*   إضافة راوت صفحة محتوى الكورس */}
       <Route
-        path="/admin/dashboard"
+        path="/student/courses/:courseId/content"
         element={
-          <AdminRoute>
-            <MainLayout>
-              <AdminDashboard />
-            </MainLayout>
-          </AdminRoute>
+          <MainLayout>
+            <CourseContentPage />
+          </MainLayout>
         }
       />
 
-      {/* صفحة الـ Instructor محمية */}
+      <Route
+        path="/student/dashboard"
+        element={
+          <RoleProtectedRoute allowedRoles={["student"]}>
+            <MainLayout>
+              <Dashboard />
+            </MainLayout>
+          </RoleProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/dashboard"
+        element={
+          <RoleProtectedRoute allowedRoles={["admin"]}>
+            <MainLayout>
+              <AdminDashboard />
+            </MainLayout>
+          </RoleProtectedRoute>
+        }
+      />
+
       <Route
         path="/instructor/dashboard"
         element={
-          <InstructorRoute>
+          <RoleProtectedRoute allowedRoles={["instructor"]}>
             <MainLayout>
               <InstructorDashboard />
             </MainLayout>
-          </InstructorRoute>
+          </RoleProtectedRoute>
         }
       />
     </Routes>

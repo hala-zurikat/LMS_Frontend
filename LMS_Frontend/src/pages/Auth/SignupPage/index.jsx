@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../../services/authService";
 import styles from "./SignUpPage.module.css";
-import { FaEnvelope, FaLock, FaUser, FaEye, FaEyeSlash } from "react-icons/fa"; // أضفت FaEye و FaEyeSlash
+import { FaEnvelope, FaLock, FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import logo from "../../../assets/images/logo2.png";
 
@@ -11,9 +11,11 @@ function SignUpPage() {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
+
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // حالة رؤية كلمة السر
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,18 +25,24 @@ function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
     try {
-      const data = await register(formData);
+      const { confirmPassword, ...dataToSend } = formData; // لا نرسل confirm للسيرفر
+      const data = await register(dataToSend);
 
       localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/dashboard");
+      navigate("/student/dashboard");
     } catch (err) {
       const backendMessage =
         err?.response?.data?.error ||
         err?.response?.data?.message ||
         err?.message ||
         "Registration failed";
-
       setError(backendMessage);
     }
   };
@@ -73,6 +81,7 @@ function SignUpPage() {
           />
         </div>
 
+        {/* كلمة السر */}
         <div className={styles.inputGroup} style={{ position: "relative" }}>
           <FaLock className={styles.icon} />
           <input
@@ -83,23 +92,40 @@ function SignUpPage() {
             onChange={handleChange}
             required
           />
-          {/* أيقونة تبديل رؤية كلمة السر */}
           <span
             onClick={() => setShowPassword(!showPassword)}
             className={styles.togglePasswordIcon}
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
-
           <small className={styles.passwordHint}>
             Password must contain uppercase, lowercase, number, and special
             character.
           </small>
         </div>
 
+        <div className={styles.inputGroup} style={{ position: "relative" }}>
+          <FaLock className={styles.icon} />
+          <input
+            type={showPassword ? "text" : "password"}
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            className={styles.togglePasswordIcon}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
+
         <button type="submit" className={styles.submitButton}>
           Sign Up
         </button>
+
         {error && <p className={styles.error}>{error}</p>}
 
         <div className={styles.divider}>or</div>

@@ -1,7 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
-import logo from "../../../assets/images/logo1.jpg";
+import { Link } from "react-router-dom";
+import logo from "../../../assets/images/Logo1.jpg";
 
 function Footer() {
   return (
@@ -14,15 +13,51 @@ function Footer() {
 
         <ul className={styles.links}>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="#">Home</Link>
           </li>
           <li>
-            <Link to="/courses">Courses</Link>
+            <Link to="#">About</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="#">Courses</Link>
+          </li>
+          <li>
+            <Link to="#">FAQ</Link>
+          </li>
+          <li>
+            <Link to="#">Privacy Policy</Link>
+          </li>
+          <li>
+            <Link to="#">Contact</Link>
           </li>
         </ul>
+
+        <div className={styles.socialMedia}>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <i className="fab fa-linkedin-in"></i>
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter"
+          >
+            <i className="fab fa-twitter"></i>
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+          >
+            <i className="fab fa-facebook-f"></i>
+          </a>
+        </div>
       </div>
 
       <div className={styles.copyRight}>

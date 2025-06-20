@@ -1,0 +1,58 @@
+/* src/pages/Admin/ManageUsersPage/ManageUsers.module.css */
+
+.container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #333;
+  text-align: center;
+  border-bottom: 2px solid #0077cc;
+  padding-bottom: 0.5rem;
+}
+
+.userTable {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.userTable th,
+.userTable td {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.userTable th {
+  background-color: #0077cc;
+  color: #fff;
+  font-weight: bold;
+}
+
+.userTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.userTable tr:hover {
+  background-color: #eef6ff;
+  transition: background-color 0.3s ease;
+}
+
+select {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  background-color: #fff;
+}
+
+select:focus {
+  outline: none;
+  border-color: #0077cc;
+  box-shadow: 0 0 4px rgba(0, 119, 204, 0.4);
+}

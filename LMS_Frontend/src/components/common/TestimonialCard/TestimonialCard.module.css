@@ -1,0 +1,50 @@
+.card {
+  background-color: white;
+  border-radius: 15px;
+  padding: 1.8rem 1.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  max-width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 0.8rem;
+  box-shadow: 0 0 8px #007bff88;
+}
+
+.name {
+  font-size: 1.25rem;
+  color: #003366;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.rating {
+  color: #ffb400; /* لون نجوم أصفر ذهبي */
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.starFilled {
+  color: #ffb400;
+}
+
+.starEmpty {
+  color: #ccc;
+}
+
+.feedback {
+  font-style: italic;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.4;
+}
