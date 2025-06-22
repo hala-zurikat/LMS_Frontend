@@ -22,7 +22,7 @@ function ManageUsers() {
   const handleRoleChange = async (userId, newRole) => {
     try {
       await updateUserRole(userId, { role: newRole });
-      fetchUsers(); // لإعادة التحديث بعد التغيير
+      fetchUsers();
     } catch (err) {
       console.error("Error updating role:", err);
     }
