@@ -21,12 +21,29 @@ export async function enrollInCourse(courseId) {
   return res.data;
 }
 
-// Get detailed course content for a specific course (لصفحة Course Content)
+// Get lesson by ID
+export async function getLessonById(lessonId) {
+  const response = await api.get(`/lessons/${lessonId}`);
+  return response.data;
+}
+
 export async function getCourseContent(courseId) {
-  const response = await axios.get(`/api/courses/${courseId}/content`);
+  const response = await api.get(`/courses/${courseId}/details`);
   return response.data;
 }
-export async function getCourseDetails(courseId) {
-  const response = await axios.get(`/api/courses/${courseId}/details`);
-  return response.data;
-}
+// export async function markLessonComplete({
+//   courseId,
+//   completedLessonsCount,
+//   totalLessons,
+// })
+//   const res = await api.patch("/enrollments/progress", {
+//     course_id: courseId,
+//     completedLessonsCount,
+//     totalLessons,
+//   });
+//   return res.data;
+// }
+// export async function getCourseDetails(courseId) {
+//   const response = await axios.get(`/api/courses/${courseId}/details`);
+//   return response.data;
+// }

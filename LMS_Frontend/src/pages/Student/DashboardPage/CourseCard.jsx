@@ -1,40 +1,32 @@
-// src/features/student/components/CourseCard.jsx
 import React from "react";
-import styles from "./DashboardPage.module.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import styles from "../DashboardPage/DashboardPage.module.css";
 
 function CourseCard({ course }) {
-  const {
-    title,
-    description,
-    progress,
-    course_id,
-    thumbnail_url,
-    instructor_name,
-  } = course;
+  const navigate = useNavigate();
+
+  if (!course) return null;
+
+  const handleClick = () => {
+    navigate(`/student/courses/${course.course_id}`);
+  };
 
   return (
-    <div className={styles.card}>
-      {thumbnail_url && (
-        <img src={thumbnail_url} alt={title} className={styles.image} />
-      )}
-      <h4 className={styles.title}>{title}</h4>
-      <p className={styles.instructor}>
-        Instructor: {instructor_name || "Unknown"}
-      </p>
-      <p className={styles.description}>{description?.slice(0, 80)}...</p>
-
+    <div className={styles.card} onClick={handleClick}>
+      <img
+        src={course.thumbnail_url}
+        alt={course.title}
+        className={styles.image}
+      />
+      <h4 className={styles.title}>{course.title}</h4>
+      <p className={styles.instructor}>Instructor: {course.instructor_name}</p>
+      <p className={styles.description}>{course.description}</p>
       <div className={styles.progressBar}>
         <div
           className={styles.progressFill}
-          style={{ width: `${progress || 0}%` }}
-        ></div>
+          style={{ width: `${course.progress || 0}%` }}
+        />
       </div>
-      <p className={styles.progressText}>{progress || 0}% completed</p>
-
-      <Link to={`/student/courses/${course_id}`} className={styles.link}>
-        Go to Course
-      </Link>
     </div>
   );
 }
