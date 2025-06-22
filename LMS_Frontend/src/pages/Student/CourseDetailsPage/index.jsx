@@ -1,51 +1,31 @@
-// src/pages/Student/CourseDetailsPage/index.jsx
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getCourseDetails } from "../../../services/courseService";
-import styles from "./CourseDetailsPage.module.css";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
 
-export default function CourseDetailsPage() {
-  const { courseId } = useParams();
-  const [course, setCourse] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchCourse() {
-      try {
-        const data = await getCourseDetails(courseId);
-        setCourse(data);
-      } catch (err) {
-        console.error("Failed to fetch course:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchCourse();
-  }, [courseId]);
-
-  if (loading) return <p>Loading course...</p>;
-  if (!course) return <p>Course not found.</p>;
+function CourseDetailsPage({ modules }) {
+  //modules: array with lessons inside
 
   return (
-    <div className={styles.container}>
-      <h2>{course.title}</h2>
-      <p>{course.description}</p>
-      <img
-        src={course.thumbnail_url}
-        alt={course.title}
-        className={styles.thumbnail}
-      />
-
-      <h3>Modules</h3>
-      {course.modules.map((module) => (
-        <div key={module.id} className={styles.module}>
-          <h4>{module.title}</h4>
-          <p>{module.description}</p>
-          <ul>
+    <div style={{ padding: "1rem" }}>
+      <h2>Modules & Lessons</h2>
+      {modules.map((module) => (
+        <div key={module.id} style={{ marginBottom: "1rem" }}>
+          <h3>{module.title}</h3>
+          <ul style={{ listStyle: "none", paddingLeft: 0 }}>
             {module.lessons.map((lesson) => (
-              <li key={lesson.id}>
-                {lesson.title} ({lesson.content_type})
+              <li
+                key={lesson.id}
+                style={{
+                  padding: "0.5rem",
+                  borderBottom: "1px solid #eee",
+                  background: "red",
+                }}
+              >
+                <Link
+                  to={`/lessons/${lesson.id}`}
+                  style={{ textDecoration: "none", color: "#007bff" }}
+                >
+                  📘 {lesson.title} ({lesson.content_type})
+                </Link>
               </li>
             ))}
           </ul>
@@ -54,3 +34,5 @@ export default function CourseDetailsPage() {
     </div>
   );
 }
+
+export default CourseDetailsPage;
