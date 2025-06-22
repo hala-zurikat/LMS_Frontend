@@ -1,13 +1,13 @@
 import api from "./api";
 import axios from "axios";
 
-// Get all available courses (لصفحة الاستعراض)
+// Get all available courses
 export async function getAllCourses() {
   const response = await api.get("/courses");
   return response.data;
 }
 
-// Get the courses the current user is enrolled in (للطالب)
+// Get the courses the current user is enrolled in
 export async function getMyEnrollments() {
   const res = await api.get("/enrollments/me");
   return res.data;
@@ -31,19 +31,19 @@ export async function getCourseContent(courseId) {
   const response = await api.get(`/courses/${courseId}/details`);
   return response.data;
 }
-// export async function markLessonComplete({
-//   courseId,
-//   completedLessonsCount,
-//   totalLessons,
-// })
-//   const res = await api.patch("/enrollments/progress", {
-//     course_id: courseId,
-//     completedLessonsCount,
-//     totalLessons,
-//   });
-//   return res.data;
-// }
-// export async function getCourseDetails(courseId) {
-//   const response = await axios.get(`/api/courses/${courseId}/details`);
-//   return response.data;
-// }
+export async function getAllAdminCourses() {
+  const response = await api.get("/admin/courses");
+  return response.data;
+}
+
+export async function getAdminCourseContent(courseId) {
+  const response = await api.get(`/admin/courses/${courseId}/content`);
+  return response.data;
+}
+
+export async function approveAdminCourse(courseId, approve) {
+  const response = await api.patch(`/admin/courses/${courseId}/approve`, {
+    approve,
+  });
+  return response.data;
+}
