@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getCourseContent } from "../../../services/courseService";
 import styles from "./CourseContentPage.module.css";
@@ -6,73 +7,60 @@ import styles from "./CourseContentPage.module.css";
 function CourseContentPage() {
   const { courseId } = useParams();
   const [courseData, setCourseData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [openModules, setOpenModules] = useState({});
 
   useEffect(() => {
-    async function fetchCourse() {
+    async function fetchCourseContent() {
       try {
         const data = await getCourseContent(courseId);
         setCourseData(data);
-      } catch (err) {
-        setError("Failed to fetch course details");
-      } finally {
-        setLoading(false);
+      } catch (error) {
+        console.error("Failed to load course:", error);
       }
     }
-    fetchCourse();
+    fetchCourseContent();
   }, [courseId]);
 
-  const toggleModule = (id) => {
-    setOpenModules((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
-
-  if (loading) return <p className={styles.loading}>Loading...</p>;
-  if (error) return <p className={styles.error}>{error}</p>;
+  if (!courseData) return <p className={styles.loading}>Loading course...</p>;
 
   return (
     <div className={styles.courseContainer}>
-      <h1 className={styles.courseTitle}>{courseData.title}</h1>
+      <Link to="/student/dashboard" className={styles.backButton}>
+        ← Back to Dashboard
+      </Link>
+      <h2 className={styles.courseTitle}>{courseData.title}</h2>
       <p className={styles.courseDescription}>{courseData.description}</p>
 
       {courseData.modules.map((module) => (
         <div key={module.id} className={styles.moduleBox}>
-          <div
-            className={styles.moduleHeader}
-            onClick={() => toggleModule(module.id)}
-            tabIndex={0}
-            role="button"
-            onKeyPress={(e) => {
-              if (e.key === "Enter") toggleModule(module.id);
-            }}
-          >
+          <div className={styles.moduleHeader}>
             <h2>{module.title}</h2>
-            <span
-              className={`${styles.arrow} ${
-                openModules[module.id] ? styles.open : ""
-              }`}
-            >
-              &#9662;
-            </span>
+            <span className={styles.arrow}>▼</span>
           </div>
+          <p style={{ padding: "0 20px", color: "#666" }}>
+            {module.description}
+          </p>
 
-          {openModules[module.id] && (
-            <ul className={styles.lessonsList}>
-              {module.lessons.length === 0 && (
-                <li className={styles.noLessons}>No lessons available</li>
-              )}
-              {module.lessons.map((lesson) => (
+          <ul className={styles.lessonsList}>
+            {module.lessons.length > 0 ? (
+              module.lessons.map((lesson) => (
                 <li key={lesson.id} className={styles.lessonItem}>
-                  <strong>{lesson.title}</strong> —{" "}
-                  <em>{lesson.content_type}</em>
+                  <Link
+                    to={`/lessons/${lesson.id}`}
+                    className={styles.lessonLink}
+                  >
+                    <div className={styles.lessonCard}>
+                      <h4>{lesson.title}</h4>
+                      <span className={styles.typeTag}>
+                        {lesson.content_type}
+                      </span>
+                    </div>
+                  </Link>
                 </li>
-              ))}
-            </ul>
-          )}
+              ))
+            ) : (
+              <li className={styles.noLessons}>No lessons in this module.</li>
+            )}
+          </ul>
         </div>
       ))}
     </div>

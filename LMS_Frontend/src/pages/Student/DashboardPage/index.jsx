@@ -32,7 +32,6 @@ function DashboardPage() {
       <div className={styles.headerSection}>
         <img src={avatarUrl} alt="Profile" className={styles.avatar} />
         <h2>Welcome back, {user?.name} 👋</h2>
-        <LogoutButton />
       </div>
 
       <h3>Your Enrolled Courses</h3>

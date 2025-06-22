@@ -4,7 +4,6 @@ import SignupPage from "../pages/Auth/SignupPage";
 import Dashboard from "../pages/Student/DashboardPage";
 import Home from "../pages/Home/Home";
 import CoursesPage from "../features/courses/CoursesPage";
-import CourseDetailsPage from "../pages/Student/CourseDetailsPage";
 import CourseContentPage from "../pages/Student/CourseContentPage/CourseContentPage.jsx";
 import MainLayout from "../components/layout/MainLayout";
 import AdminDashboard from "../pages/Admin/DashboardPage/index";
@@ -13,14 +12,16 @@ import ContactPage from "../pages/Home/ContactMe/index";
 import RoleProtectedRoute from "../components/ProtectedRoutes/RoleProtectedRoute.jsx";
 import Unauthorized from "../pages/Error/Unauthorized.jsx";
 import ManageUsersPage from "../pages/Admin/ManageUsersPage/ManageUsers.jsx";
+import CourseDetailsPage from "../pages/Student/CourseDetailsPage/index.jsx";
 
+import LessonContentPage from "../pages/Student/LessonContentPage/index.jsx";
 export default function AppRouter() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-
       <Route path="/unauthorized" element={<Unauthorized />} />
+
       <Route
         path="/"
         element={
@@ -29,6 +30,7 @@ export default function AppRouter() {
           </MainLayout>
         }
       />
+
       <Route
         path="/courses"
         element={
@@ -37,37 +39,12 @@ export default function AppRouter() {
           </MainLayout>
         }
       />
-      <Route
-        path="/admin/users"
-        element={
-          <RoleProtectedRoute allowedRoles={["admin"]}>
-            <ManageUsersPage />
-          </RoleProtectedRoute>
-        }
-      />
 
       <Route
         path="/contact"
         element={
           <MainLayout>
             <ContactPage />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="/student/courses/:courseId"
-        element={
-          <MainLayout>
-            <CourseDetailsPage />
-          </MainLayout>
-        }
-      />
-      {/*   إضافة راوت صفحة محتوى الكورس */}
-      <Route
-        path="/student/courses/:courseId/content"
-        element={
-          <MainLayout>
-            <CourseContentPage />
           </MainLayout>
         }
       />
@@ -84,6 +61,14 @@ export default function AppRouter() {
       />
 
       <Route
+        path="/student/courses/:courseId"
+        element={
+          <MainLayout>
+            <CourseContentPage />
+          </MainLayout>
+        }
+      />
+      <Route
         path="/admin/dashboard"
         element={
           <RoleProtectedRoute allowedRoles={["admin"]}>
@@ -93,6 +78,16 @@ export default function AppRouter() {
           </RoleProtectedRoute>
         }
       />
+
+      <Route
+        path="/admin/users"
+        element={
+          <RoleProtectedRoute allowedRoles={["admin"]}>
+            <ManageUsersPage />
+          </RoleProtectedRoute>
+        }
+      />
+      <Route path="/lessons/:lessonId" element={<LessonContentPage />} />
 
       <Route
         path="/instructor/dashboard"
