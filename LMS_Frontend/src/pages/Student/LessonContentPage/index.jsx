@@ -1,86 +1,108 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { getLessonById } from "../../../services/courseService";
+import { useParams } from "react-router-dom";
+import { getLessonContent } from "../../../services/lessonService";
+import styles from "./LessonContentPage.module.css";
 
 function LessonContentPage() {
   const { lessonId } = useParams();
   const [lesson, setLesson] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [answers, setAnswers] = useState({});
+  const [score, setScore] = useState(null);
 
   useEffect(() => {
     async function fetchLesson() {
       try {
-        const data = await getLessonById(lessonId);
+        const data = await getLessonContent(lessonId);
+        console.log("Lesson data:", data);
         setLesson(data);
       } catch (err) {
-        console.error("Failed to load lesson:", err);
-      } finally {
-        setLoading(false);
+        console.error("Error fetching lesson:", err);
       }
     }
-
     fetchLesson();
   }, [lessonId]);
 
-  if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
-  if (!lesson) return <p style={{ textAlign: "center" }}>Lesson not found</p>;
+  if (!lesson) return <p>Loading...</p>;
+
+  const handleSelect = (questionId, selectedOption) => {
+    setAnswers((prev) => ({ ...prev, [questionId]: selectedOption }));
+  };
+
+  const handleSubmit = () => {
+    let correct = 0;
+    lesson.questions.forEach((q) => {
+      if (answers[q.id] === q.correct_answer) correct++;
+    });
+    setScore(correct);
+  };
 
   return (
-    <div style={{ padding: "2rem", display: "flex", justifyContent: "center" }}>
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "850px",
-          backgroundColor: "#fdfdfd",
-          padding: "2rem",
-          borderRadius: "12px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-        }}
-      >
-        <Link to={-1} style={{ color: "#1976d2", textDecoration: "none" }}>
-          ← Back
-        </Link>
+    <div className={styles.lessonContainer}>
+      <h2 className={styles.lessonTitle}>{lesson.title}</h2>
 
-        <h2 style={{ color: "#1976d2", marginTop: "1rem" }}>{lesson.title}</h2>
-        <p style={{ color: "#555", marginBottom: "1.5rem" }}>
-          Content Type: <strong>{lesson.content_type}</strong>
-        </p>
-
-        {lesson.content_type === "video" && lesson.content_url && (
-          <div style={{ borderRadius: "10px", overflow: "hidden" }}>
-            <video
-              controls
-              src={lesson.content_url}
-              style={{
-                width: "100%",
-                borderRadius: "10px",
-                boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
-              }}
-            />
-          </div>
-        )}
-
-        {lesson.content_type === "text" && (
-          <div
-            style={{
-              background: "#eef5ff",
-              padding: "1.5rem",
-              borderRadius: "8px",
-              fontSize: "1.1rem",
-              color: "#333",
-              lineHeight: "1.6",
-            }}
+      {/* عرض الفيديو */}
+      {lesson.content_type === "video" && (
+        <div className={styles.videoContainer}>
+          <video
+            className={styles.videoPlayer}
+            controls
+            src={lesson.content_url}
           >
-            <p>{lesson.content_url}</p>
-          </div>
-        )}
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      )}
 
-        {lesson.content_type === "quiz" && (
-          <div style={{ marginTop: "1rem", color: "#888" }}>
-            Quiz will be available soon...
-          </div>
-        )}
-      </div>
+      {/* عرض نص فقط */}
+      {lesson.content_type === "text" && (
+        <div className={styles.textContent}>
+          <p>{lesson.content_url}</p>
+        </div>
+      )}
+
+      {/* عرض الكويز (quiz) */}
+      {/* عرض الكويز (quiz) */}
+      {lesson.content_type === "quiz" &&
+      lesson.questions &&
+      lesson.questions.length > 0 ? (
+        <>
+          {lesson.questions.map((q) => (
+            <div key={q.id} className={styles.questionBox}>
+              <h4>{q.question}</h4>
+              <div className={styles.optionsGroup}>
+                {q.options.map((opt, index) => (
+                  <label key={index} className={styles.option}>
+                    <input
+                      type="radio"
+                      name={`question-${q.id}`}
+                      value={opt}
+                      checked={answers[q.id] === opt}
+                      onChange={() => handleSelect(q.id, opt)}
+                    />
+                    {opt}
+                  </label>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <button
+            onClick={handleSubmit}
+            className={styles.submitButton}
+            disabled={Object.keys(answers).length !== lesson.questions.length}
+          >
+            Submit Quiz
+          </button>
+
+          {score !== null && (
+            <p className={styles.result}>
+              Your score: {score} / {lesson.questions.length}
+            </p>
+          )}
+        </>
+      ) : (
+        <p className={styles.noQuizMessage}>No quiz questions available.</p>
+      )}
     </div>
   );
 }

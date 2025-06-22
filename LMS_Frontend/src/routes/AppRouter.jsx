@@ -13,7 +13,7 @@ import RoleProtectedRoute from "../components/ProtectedRoutes/RoleProtectedRoute
 import Unauthorized from "../pages/Error/Unauthorized.jsx";
 import ManageUsersPage from "../pages/Admin/ManageUsersPage/ManageUsers.jsx";
 import CourseDetailsPage from "../pages/Student/CourseDetailsPage/index.jsx";
-
+import ManageCoursesPage from "../pages/Admin/ManageCoursesPage/ManageCoursesPage.jsx";
 import LessonContentPage from "../pages/Student/LessonContentPage/index.jsx";
 export default function AppRouter() {
   return (
@@ -46,6 +46,16 @@ export default function AppRouter() {
           <MainLayout>
             <ContactPage />
           </MainLayout>
+        }
+      />
+      <Route
+        path="/admin/courses"
+        element={
+          <RoleProtectedRoute allowedRoles={["admin"]}>
+            <MainLayout>
+              <ManageCoursesPage />
+            </MainLayout>
+          </RoleProtectedRoute>
         }
       />
 
@@ -83,7 +93,10 @@ export default function AppRouter() {
         path="/admin/users"
         element={
           <RoleProtectedRoute allowedRoles={["admin"]}>
-            <ManageUsersPage />
+            <MainLayout>
+              {" "}
+              <ManageUsersPage />
+            </MainLayout>
           </RoleProtectedRoute>
         }
       />
