@@ -1,0 +1,45 @@
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.courseBlock {
+  background: #e3f2fd;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.moduleBlock {
+  background: #fff;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-left: 4px solid #1976d2;
+  border-radius: 4px;
+}
+
+.quizList {
+  list-style: none;
+  padding-left: 15px;
+}
+
+.quizItem {
+  padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+}
+.deleteBtn {
+  margin-top: 5px;
+  padding: 4px 10px;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.deleteBtn:hover {
+  background-color: #b71c1c;
+}

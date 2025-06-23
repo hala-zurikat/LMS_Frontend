@@ -12,9 +12,19 @@ import ContactPage from "../pages/Home/ContactMe/index";
 import RoleProtectedRoute from "../components/ProtectedRoutes/RoleProtectedRoute.jsx";
 import Unauthorized from "../pages/Error/Unauthorized.jsx";
 import ManageUsersPage from "../pages/Admin/ManageUsersPage/ManageUsers.jsx";
-import CourseDetailsPage from "../pages/Student/CourseDetailsPage/index.jsx";
 import ManageCoursesPage from "../pages/Admin/ManageCoursesPage/ManageCoursesPage.jsx";
 import LessonContentPage from "../pages/Student/LessonContentPage/index.jsx";
+import InstructorManageCoursesPage from "../pages/Instructor/ManageCoursesPage/CourseList.jsx";
+import AddCoursePage from "../pages/Instructor/AddCoursePage";
+import InstructorCourseEdit from "../pages/Instructor/ManageCoursesPage/EditCourse";
+import InstructorCourseView from "../pages/Instructor/ManageCoursesPage/ViewCourse";
+import ManageModules from "../pages/Instructor/ManageCoursesPage/ManageModules";
+import ManageLessons from "../pages/Instructor/ManageLessons/ManageLessons.jsx";
+import AddLesson from "../pages/Instructor/ManageLessons/AddLesson.jsx";
+import EditLesson from "../pages/Instructor/ManageLessons/EditLesson.jsx";
+import AddQuizPage from "../pages//Instructor/AddQuizPage";
+import ManageQuizzesPage from "../pages/Instructor/ManageQuizzes";
+
 export default function AppRouter() {
   return (
     <Routes>
@@ -110,6 +120,91 @@ export default function AppRouter() {
               <InstructorDashboard />
             </MainLayout>
           </RoleProtectedRoute>
+        }
+      />
+      <Route
+        path="/instructor/courses"
+        element={
+          <RoleProtectedRoute allowedRoles={["instructor"]}>
+            <MainLayout>
+              <InstructorManageCoursesPage />
+            </MainLayout>
+          </RoleProtectedRoute>
+        }
+      />
+      <Route
+        path="/instructor/add-course"
+        element={
+          <RoleProtectedRoute allowedRoles={["instructor"]}>
+            <MainLayout>
+              <AddCoursePage />
+            </MainLayout>
+          </RoleProtectedRoute>
+        }
+      />
+      <Route
+        path="/instructor/courses/edit/:id"
+        element={
+          <MainLayout>
+            <InstructorCourseEdit />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/instructor/courses/view/:id"
+        element={
+          <MainLayout>
+            <InstructorCourseView />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/instructor/courses/:courseId/modules"
+        element={
+          <MainLayout>
+            <ManageModules />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/instructor/modules/:moduleId/lessons"
+        element={
+          <MainLayout>
+            <ManageLessons />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/instructor/modules/:moduleId/lessons/add"
+        element={
+          <MainLayout>
+            <AddLesson />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/instructor/modules/:moduleId/lessons/edit/:lessonId"
+        element={
+          <MainLayout>
+            <EditLesson />
+          </MainLayout>
+        }
+      />
+
+      <Route
+        path="/instructor/lessons/:lessonId/quizzes/add"
+        element={
+          <MainLayout>
+            <AddQuizPage />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/instructor/quizzes"
+        element={
+          <MainLayout>
+            <ManageQuizzesPage />
+          </MainLayout>
         }
       />
     </Routes>
