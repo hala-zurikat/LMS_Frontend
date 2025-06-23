@@ -1,0 +1,46 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #1976d2;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0d47a1;
+}
+
+.moduleList {
+  list-style: none;
+  padding: 0;
+}
+
+.moduleCard {
+  background: #f0f8ff;
+  border: 1px solid #cce;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
