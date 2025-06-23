@@ -2,14 +2,14 @@
   padding: 20px;
   max-width: 800px;
   margin: auto;
-  background-color: #dbe9ff; /* خلفية فاتحة متناسقة */
+  background-color: #dbe9ff; /* Light background */
   border-radius: 8px;
 }
 
 .lessonTitle {
   font-size: 1.8rem;
   margin-bottom: 20px;
-  color: #0d47a1; /* اللون الأساسي */
+  color: #0d47a1; /* Primary blue */
 }
 
 .videoContainer {
@@ -32,11 +32,11 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* تحسين عرض أسئلة الكويز */
+/* Quiz styles */
 .questionBox {
   margin-bottom: 30px;
   padding: 20px;
-  background: #b0c7ff; /* خلفية زرقاء فاتحة */
+  background: #b0c7ff; /* Light blue background */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(13, 71, 161, 0.6);
   transition: box-shadow 0.3s ease;
@@ -53,7 +53,6 @@
   font-weight: 600;
 }
 
-/* تنظيم الخيارات */
 .optionsGroup {
   margin-left: 15px;
   display: flex;
@@ -68,7 +67,7 @@
   cursor: pointer;
   padding: 12px 16px;
   border-radius: 8px;
-  background-color: #d0e0ff; /* أفتح شوية */
+  background-color: #d0e0ff;
   box-shadow: 0 1px 4px rgba(13, 71, 161, 0.3);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
@@ -76,7 +75,7 @@
 }
 
 .option:hover {
-  background-color: #a8c2ff; /* أغمق شوي عند hover */
+  background-color: #a8c2ff;
   box-shadow: 0 4px 12px rgba(13, 71, 161, 0.5);
 }
 
@@ -88,7 +87,6 @@
   accent-color: #0d47a1;
 }
 
-/* زر إرسال الإجابات */
 .submitButton {
   background-color: #0d47a1;
   color: white;
@@ -119,5 +117,12 @@
   font-size: 1.5rem;
   font-weight: 700;
   color: #2e7d32;
+  text-align: center;
+}
+
+.noQuizMessage {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 20px;
   text-align: center;
 }

@@ -84,6 +84,14 @@ function Navbar() {
                   Manage Courses
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/instructor/quizzes"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Manage Quizzes
+                </Link>
+              </li>
             </>
           )}
 
