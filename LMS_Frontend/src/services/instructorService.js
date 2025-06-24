@@ -36,7 +36,7 @@ export async function updateCourse(id, data) {
 
 export async function deleteCourse(id) {
   try {
-    const response = await api.delete(`/instructor/courses/${id}`);
+    const response = await api.delete(`/courses/${id}`);
     return response.status === 200;
   } catch (error) {
     console.error("Failed to delete course", error);

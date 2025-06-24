@@ -26,7 +26,6 @@ export default function ManageQuizzesPage() {
 
     try {
       await deleteQuiz(quizId);
-      // بعد الحذف، نعيد تحميل البيانات
       fetchData();
     } catch (err) {
       console.error("❌ Failed to delete quiz:", err.message);

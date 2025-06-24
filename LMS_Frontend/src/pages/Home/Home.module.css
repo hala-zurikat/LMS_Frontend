@@ -1,8 +1,8 @@
 .home {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 40px;
   min-height: 100vh;

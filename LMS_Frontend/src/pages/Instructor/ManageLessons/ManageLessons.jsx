@@ -63,7 +63,12 @@ export default function ManageLessons() {
               <h3>{lesson.title}</h3>
               <p>Type: {lesson.content_type}</p>
               <div className={styles.actions}>
-                <button onClick={() => handleEdit(lesson.id)}>Edit</button>
+                <button
+                  onClick={() => handleEdit(lesson.id)}
+                  className={styles.addQuizBtn}
+                >
+                  Edit
+                </button>
                 <button
                   onClick={() => handleDelete(lesson.id)}
                   className={styles.deleteBtn}
