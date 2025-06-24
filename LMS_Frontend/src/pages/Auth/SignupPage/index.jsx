@@ -85,19 +85,19 @@ function SignUpPage() {
         <div className={styles.inputGroup} style={{ position: "relative" }}>
           <FaLock className={styles.icon} />
           <input
-            type={showPassword ? "text" : "password"}
+            type="password"
             name="password"
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
             required
           />
-          <span
+          {/* <span
             onClick={() => setShowPassword(!showPassword)}
             className={styles.togglePasswordIcon}
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
+          </span> */}
           <small className={styles.passwordHint}>
             Password must contain uppercase, lowercase, number, and special
             character.
@@ -107,19 +107,19 @@ function SignUpPage() {
         <div className={styles.inputGroup} style={{ position: "relative" }}>
           <FaLock className={styles.icon} />
           <input
-            type={showPassword ? "text" : "password"}
+            type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
             value={formData.confirmPassword}
             onChange={handleChange}
             required
           />
-          <span
+          {/* <span
             onClick={() => setShowPassword(!showPassword)}
             className={styles.togglePasswordIcon}
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
+          </span> */}
         </div>
 
         <button type="submit" className={styles.submitButton}>

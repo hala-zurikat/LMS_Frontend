@@ -14,7 +14,7 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const { login } = useContext(AuthContext); // الحصول على دالة login من الكونتكست
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,7 +30,7 @@ function LoginPage() {
       if (data.user) {
         console.log("✅ Logged in user:", data.user);
 
-        login(data.user); // استدعاء دالة تسجيل الدخول من الكونتكست
+        login(data.user);
 
         if (data.user.role === "student") {
           navigate("/student/dashboard");
@@ -39,7 +39,7 @@ function LoginPage() {
         } else if (data.user.role === "instructor") {
           navigate("/instructor/dashboard");
         } else {
-          navigate("/"); // fallback
+          navigate("/");
         }
       }
     } catch (err) {
@@ -79,7 +79,7 @@ function LoginPage() {
         <div className={styles.inputGroup} style={{ position: "relative" }}>
           <FaLock className={styles.icon} />
           <input
-            type={showPassword ? "text" : "password"}
+            type="password"
             name="password"
             placeholder="Password"
             value={formData.password}
@@ -87,24 +87,15 @@ function LoginPage() {
             required
             autoComplete="current-password"
           />
-          <span
+          {/* <span
             onClick={() => setShowPassword(!showPassword)}
             className={styles.togglePasswordIcon}
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </span>
+          </span> */}
         </div>
 
-        <div className={styles.rememberContainer}>
-          <label className={styles.rememberLabel}>
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={() => setRememberMe(!rememberMe)}
-            />
-            Remember me
-          </label>
-        </div>
+        <div className={styles.rememberContainer}></div>
 
         {error && <p className={styles.error}>{error}</p>}
 

@@ -6,10 +6,10 @@
 
 .addBtn {
   margin-bottom: 1rem;
-  padding: 0.5rem 1rem;
   background-color: #1976d2;
   color: white;
   border: none;
+  padding: 10px 16px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -37,7 +37,7 @@
   background-color: #d32f2f;
   color: white;
   border: none;
-  padding: 0.3rem 0.8rem;
+  padding: 10px 16px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -46,7 +46,7 @@
   color: white;
   border: none;
   padding: 10px 16px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-weight: bold;
   cursor: pointer;
   margin-left: 10px;

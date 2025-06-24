@@ -12,8 +12,7 @@ function Navbar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); // نستخدمها لمعرفة الصفحة الحالية
-
+  const location = useLocation();
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -50,7 +49,6 @@ function Navbar() {
         }`}
       >
         <ul className={styles.navLinks}>
-          {/* نعرض رابط Home فقط إذا كنا في صفحة الـ Home */}
           {location.pathname === "/" && (
             <li>
               <Link to="/" onClick={() => setIsMenuOpen(false)}>
@@ -68,14 +66,13 @@ function Navbar() {
             </li>
           )}
 
-          {/* روابط خاصة بالمعلم */}
           {role === "instructor" && (
             <>
-              <li>
+              {/* <li>
                 <Link to="/courses/create" onClick={() => setIsMenuOpen(false)}>
                   Create Course
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   to="/instructor/courses"
