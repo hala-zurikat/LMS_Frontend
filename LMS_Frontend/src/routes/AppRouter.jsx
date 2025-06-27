@@ -22,16 +22,22 @@ import ManageModules from "../pages/Instructor/ManageCoursesPage/ManageModules";
 import ManageLessons from "../pages/Instructor/ManageLessons/ManageLessons.jsx";
 import AddLesson from "../pages/Instructor/ManageLessons/AddLesson.jsx";
 import EditLesson from "../pages/Instructor/ManageLessons/EditLesson.jsx";
-import AddQuizPage from "../pages//Instructor/AddQuizPage";
+import AddQuizPage from "../pages/Instructor/AddQuizPage";
 import ManageQuizzesPage from "../pages/Instructor/ManageQuizzes";
+import ManageCategoriesPage from "../pages/Admin/ManageCategories/ManageCategories";
+import SearchResultsPage from "../pages/Search/SearchResultsPage";
+import AddAssignmentPage from "../pages/Assignments/AddAssignmentPage.jsx";
+import StudentAssignmentsPage from "../pages/Assignments/StudentAssignmentsPage.jsx";
+import InstructorAssignmentsPage from "../pages/Instructor/ManageAssignments/SubmissionAssignment.jsx";
+import SubmitAssignmentPage from "../pages/Student/Assignments/SubmitAssignmentPage.jsx";
 
 export default function AppRouter() {
   return (
     <Routes>
+      {/* Public Routes */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/unauthorized" element={<Unauthorized />} />
-
       <Route
         path="/"
         element={
@@ -40,16 +46,14 @@ export default function AppRouter() {
           </MainLayout>
         }
       />
-
       <Route
-        path="/courses"
+        path="/search"
         element={
           <MainLayout>
-            <CoursesPage />
+            <SearchResultsPage />
           </MainLayout>
         }
       />
-
       <Route
         path="/contact"
         element={
@@ -59,16 +63,16 @@ export default function AppRouter() {
         }
       />
       <Route
-        path="/admin/courses"
+        path="/courses"
         element={
-          <RoleProtectedRoute allowedRoles={["admin"]}>
-            <MainLayout>
-              <ManageCoursesPage />
-            </MainLayout>
-          </RoleProtectedRoute>
+          <MainLayout>
+            <CoursesPage />
+          </MainLayout>
         }
       />
+      <Route path="/lessons/:lessonId" element={<LessonContentPage />} />
 
+      {/* Student Routes */}
       <Route
         path="/student/dashboard"
         element={
@@ -79,7 +83,6 @@ export default function AppRouter() {
           </RoleProtectedRoute>
         }
       />
-
       <Route
         path="/student/courses/:courseId"
         element={
@@ -89,29 +92,27 @@ export default function AppRouter() {
         }
       />
       <Route
-        path="/admin/dashboard"
+        path="/student/assignments"
         element={
-          <RoleProtectedRoute allowedRoles={["admin"]}>
+          <RoleProtectedRoute allowedRoles={["student"]}>
             <MainLayout>
-              <AdminDashboard />
+              <StudentAssignmentsPage />
             </MainLayout>
           </RoleProtectedRoute>
         }
       />
-
       <Route
-        path="/admin/users"
+        path="/student/assignments/submit/:assignmentId"
         element={
-          <RoleProtectedRoute allowedRoles={["admin"]}>
+          <RoleProtectedRoute allowedRoles={["student"]}>
             <MainLayout>
-              {" "}
-              <ManageUsersPage />
+              <SubmitAssignmentPage />
             </MainLayout>
           </RoleProtectedRoute>
         }
       />
-      <Route path="/lessons/:lessonId" element={<LessonContentPage />} />
 
+      {/* Instructor Routes */}
       <Route
         path="/instructor/dashboard"
         element={
@@ -148,6 +149,16 @@ export default function AppRouter() {
           <MainLayout>
             <InstructorCourseEdit />
           </MainLayout>
+        }
+      />
+      <Route
+        path="/instructor/assignments"
+        element={
+          <RoleProtectedRoute allowedRoles={["instructor"]}>
+            <MainLayout>
+              <InstructorAssignmentsPage />
+            </MainLayout>
+          </RoleProtectedRoute>
         }
       />
       <Route
@@ -190,7 +201,6 @@ export default function AppRouter() {
           </MainLayout>
         }
       />
-
       <Route
         path="/instructor/lessons/:lessonId/quizzes/add"
         element={
@@ -205,6 +215,58 @@ export default function AppRouter() {
           <MainLayout>
             <ManageQuizzesPage />
           </MainLayout>
+        }
+      />
+      <Route
+        path="/instructor/lessons/:lessonId/assignments/add"
+        element={
+          <RoleProtectedRoute allowedRoles={["instructor"]}>
+            <MainLayout>
+              <AddAssignmentPage />
+            </MainLayout>
+          </RoleProtectedRoute>
+        }
+      />
+
+      {/* Admin Routes */}
+      <Route
+        path="/admin/dashboard"
+        element={
+          <RoleProtectedRoute allowedRoles={["admin"]}>
+            <MainLayout>
+              <AdminDashboard />
+            </MainLayout>
+          </RoleProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <RoleProtectedRoute allowedRoles={["admin"]}>
+            <MainLayout>
+              <ManageUsersPage />
+            </MainLayout>
+          </RoleProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/courses"
+        element={
+          <RoleProtectedRoute allowedRoles={["admin"]}>
+            <MainLayout>
+              <ManageCoursesPage />
+            </MainLayout>
+          </RoleProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/categories"
+        element={
+          <RoleProtectedRoute allowedRoles={["admin"]}>
+            <MainLayout>
+              <ManageCategoriesPage />
+            </MainLayout>
+          </RoleProtectedRoute>
         }
       />
     </Routes>

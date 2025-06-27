@@ -86,6 +86,16 @@ export default function ManageLessons() {
                     Add Quiz
                   </button>
                 )}
+
+                {/* زر إضافة الواجب */}
+                <button
+                  onClick={() =>
+                    navigate(`/instructor/lessons/${lesson.id}/assignments/add`)
+                  }
+                  className={styles.addAssignmentBtn}
+                >
+                  Add Assignment
+                </button>
               </div>
             </li>
           ))}
