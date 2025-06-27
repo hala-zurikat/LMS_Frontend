@@ -6,9 +6,13 @@ export default function AssignmentList({ assignments }) {
     return <p>No assignments found.</p>;
   }
 
+  const uniqueAssignments = assignments.filter(
+    (item, index, self) => index === self.findIndex((t) => t.id === item.id)
+  );
+
   return (
     <div>
-      {assignments.map((assignment) => (
+      {uniqueAssignments.map((assignment) => (
         <AssignmentCard key={assignment.id} assignment={assignment} />
       ))}
     </div>
