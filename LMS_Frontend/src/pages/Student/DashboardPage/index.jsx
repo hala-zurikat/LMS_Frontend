@@ -7,6 +7,8 @@ import {
 } from "../../../services/courseService";
 import useAuth from "../../../hooks/useAuth";
 
+import LogoutButton from "../../../components/common/LogoutButton/LogoutButton";
+
 function DashboardPage() {
   const { user } = useAuth();
   const [courses, setCourses] = useState([]);
@@ -37,8 +39,12 @@ function DashboardPage() {
   return (
     <div className={styles.dashboard}>
       <div className={styles.headerSection}>
-        <img src={avatarUrl} alt="Profile" className={styles.avatar} />
-        <h2>Welcome back, {user?.name} 👋</h2>
+        <div className={styles.headerLeft}>
+          <img src={avatarUrl} alt="Profile" className={styles.avatar} />
+          <h2>Welcome back, {user?.name} 👋</h2>
+        </div>
+
+        <LogoutButton />
       </div>
 
       <h3>Your Enrolled Courses</h3>

@@ -23,9 +23,10 @@ export async function updateAssignment(id, data) {
   return res.data;
 }
 export async function getAssignmentsByInstructor(instructorId) {
-  const res = await api.get(`/instructor/assignments/${instructorId}`);
+  const res = await api.get(`/assignments/instructor/${instructorId}`);
   return res.data;
 }
+
 export async function deleteAssignment(id) {
   const res = await api.delete(`/assignments/${id}`);
   return res.data;

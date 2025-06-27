@@ -80,7 +80,7 @@
 }
 
 .searchInput {
-  padding: 6px 10px;
+  padding: 6px 10px !important;
   border-radius: 20px;
   border: none;
   outline: none;

@@ -29,15 +29,24 @@ function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logoContainer}>
-        <Link
-          to="/"
-          className={styles.logoLink}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <img src={logo} alt="Logo" className={styles.logo} />
-          <span className={styles.brandName}>EduCore</span>
-        </Link>
+      <div
+        className={styles.logoContainer}
+        onClick={() => {
+          setIsMenuOpen(false);
+          if (role === "admin") {
+            navigate("/admin/dashboard");
+          } else if (role === "instructor") {
+            navigate("/instructor/dashboard");
+          } else if (role === "student") {
+            navigate("/student/dashboard");
+          } else {
+            navigate("/");
+          }
+        }}
+        style={{ cursor: "pointer" }}
+      >
+        <img src={logo} alt="Logo" className={styles.logo} />
+        <span className={styles.brandName}>EduCore</span>
       </div>
 
       <button className={styles.menuToggle} onClick={toggleMenu}>
