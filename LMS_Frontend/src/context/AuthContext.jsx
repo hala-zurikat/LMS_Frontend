@@ -1,18 +1,17 @@
-// src/context/AuthContext.jsx
 import { createContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // ✅ حالة تحميل
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
-    setLoading(false); // ✅ إنهاء التحميل بعد محاولة القراءة
+    setLoading(false);
   }, []);
 
   const login = (userData) => {

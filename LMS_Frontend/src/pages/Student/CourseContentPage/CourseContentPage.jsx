@@ -26,7 +26,6 @@ function CourseContentPage() {
 
   if (!courseData) return <p className={styles.loading}>Loading course...</p>;
 
-  // تأكد modules موجودة وهي مصفوفة
   const modules = Array.isArray(courseData.modules) ? courseData.modules : [];
 
   return (

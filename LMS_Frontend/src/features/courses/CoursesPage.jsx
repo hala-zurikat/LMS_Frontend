@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useCourses } from "../../hooks/useCourses";
 import CourseCard from "../courses/components/CourseCard";
 import { enrollInCourse } from "../../services/courseService";
-import { getCategories } from "../../services/categoryService";
+import categoryService from "../../services/categoryService"; // ✅ تعديل هنا
 import styles from "./CoursesPage.module.css";
 
 function CoursesPage() {
@@ -11,7 +11,8 @@ function CoursesPage() {
   const { courses, loading, error } = useCourses(selectedCategory);
 
   useEffect(() => {
-    getCategories()
+    categoryService
+      .getAll() // ✅ تعديل هنا
       .then((data) => setCategories(data))
       .catch((err) => console.error("Failed to load categories:", err));
   }, []);

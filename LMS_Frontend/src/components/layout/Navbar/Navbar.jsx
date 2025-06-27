@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom"; // أضفنا useLocation
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import logo from "../../../assets/images/logo1.jpg";
 import { FaBars } from "react-icons/fa";
@@ -13,6 +13,7 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -59,20 +60,26 @@ function Navbar() {
 
           {/* روابط خاصة بالطالب */}
           {role === "student" && (
-            <li>
-              <Link to="/courses" onClick={() => setIsMenuOpen(false)}>
-                Discover Courses
-              </Link>
-            </li>
+            <>
+              <li>
+                <Link to="/courses" onClick={() => setIsMenuOpen(false)}>
+                  Discover Courses
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/student/assignments"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  All Assignments
+                </Link>
+              </li>
+            </>
           )}
 
+          {/* روابط خاصة بالمعلم */}
           {role === "instructor" && (
             <>
-              {/* <li>
-                <Link to="/courses/create" onClick={() => setIsMenuOpen(false)}>
-                  Create Course
-                </Link>
-              </li> */}
               <li>
                 <Link
                   to="/instructor/courses"
@@ -89,6 +96,14 @@ function Navbar() {
                   Manage Quizzes
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/instructor/assignments"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Manage Assignments
+                </Link>
+              </li>
             </>
           )}
 
@@ -103,6 +118,14 @@ function Navbar() {
               <li>
                 <Link to="/admin/courses" onClick={() => setIsMenuOpen(false)}>
                   Manage Courses
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/categories"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Manage Categories
                 </Link>
               </li>
             </>
