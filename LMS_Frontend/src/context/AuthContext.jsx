@@ -22,12 +22,20 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await fetch("http://localhost:3000/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (error) {
+      console.error("Logout request failed:", error);
+    }
+
     setUser(null);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
   };
-
   const isAuthenticated = !!user;
 
   return (

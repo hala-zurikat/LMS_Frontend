@@ -8,6 +8,9 @@ export default function AssignmentCard({ assignment }) {
     navigate(`/student/assignments/submit/${assignment.id}`);
   };
 
+  const isSubmitted = !!assignment.submission_id;
+  const backgroundColor = isSubmitted ? "#e7fbe7" : "#fde7e7"; // أخضر / أحمر هادئ
+
   return (
     <div
       style={{
@@ -15,7 +18,7 @@ export default function AssignmentCard({ assignment }) {
         padding: 12,
         marginBottom: 10,
         borderRadius: 6,
-        backgroundColor: "#f9f9f9",
+        backgroundColor: backgroundColor,
       }}
     >
       <h3>{assignment.title}</h3>
@@ -37,6 +40,20 @@ export default function AssignmentCard({ assignment }) {
       <p>
         <strong>Max Score:</strong> {assignment.max_score || 100}
       </p>
+
+      {isSubmitted ? (
+        <p>
+          ✅ <strong>Submitted on:</strong>{" "}
+          {new Date(assignment.submitted_at).toLocaleString()}
+          <br />
+          <strong>Grade:</strong>{" "}
+          {assignment.grade !== null ? assignment.grade : "Pending"}
+        </p>
+      ) : (
+        <p>
+          ❌ <strong>Not submitted</strong>
+        </p>
+      )}
 
       <button
         onClick={handleSubmit}

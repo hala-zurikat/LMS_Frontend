@@ -24,7 +24,7 @@ export default function AllAssignmentsPage() {
 
   return (
     <div style={{ maxWidth: 900, margin: "auto", padding: 16 }}>
-      <h2>Your Assignments222</h2>
+      <h2>Your Assignments</h2>
       {assignments.length === 0 ? (
         <p>No assignments found.</p>
       ) : (
