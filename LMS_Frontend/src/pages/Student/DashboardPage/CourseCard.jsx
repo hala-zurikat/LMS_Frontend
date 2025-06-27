@@ -1,14 +1,33 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../DashboardPage/DashboardPage.module.css";
+import { unenrollFromCourse } from "../../../services/courseService"; // استيراد دالة unEnroll
 
-function CourseCard({ course }) {
+function CourseCard({ course, onUnenrollSuccess }) {
   const navigate = useNavigate();
 
   if (!course) return null;
 
   const handleClick = () => {
-    navigate(`/student/courses/${course.course_id}`);
+    navigate(`/student/courses/${course.id || course.course_id}`);
+  };
+
+  const handleUnenroll = async (e) => {
+    e.stopPropagation(); // لمنع فتح تفاصيل الكورس عند الضغط على زر Unenroll
+    if (
+      window.confirm(
+        `Are you sure you want to unenroll from "${course.title}"?`
+      )
+    ) {
+      try {
+        await unenrollFromCourse(course.id || course.course_id);
+        alert("You have successfully unenrolled from the course.");
+        if (onUnenrollSuccess) onUnenrollSuccess(course.id || course.course_id);
+      } catch (error) {
+        alert("Failed to unenroll. Please try again later.");
+        console.error(error);
+      }
+    }
   };
 
   return (
@@ -27,6 +46,13 @@ function CourseCard({ course }) {
           style={{ width: `${course.progress || 0}%` }}
         />
       </div>
+      <button
+        type="button"
+        className={styles.unenrollButton}
+        onClick={handleUnenroll}
+      >
+        Unenroll
+      </button>
     </div>
   );
 }

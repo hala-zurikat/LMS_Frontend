@@ -79,17 +79,37 @@
   border: 2px solid #ccc;
 }
 .logoutButton {
-  background-color: #e74c3c;
+  background-color: #c21f0e;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  margin-left: auto; /* ليأخذ مكانه في نهاية الهيدر */
+  margin-left: auto;
   transition: background-color 0.3s ease;
 }
 
 .logoutButton:hover {
   background-color: #c0392b;
+}
+.unenrollButton {
+  background-color: #e74c3c !important;
+  color: white !important;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 0.75rem;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(231, 76, 60, 0.5);
+  user-select: none;
+  z-index: 10;
+}
+
+.unenrollButton:hover {
+  background-color: #c0392b !important;
 }

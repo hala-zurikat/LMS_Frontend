@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from "react";
 import styles from "./DashboardPage.module.css";
 import CourseCard from "./CourseCard";
-import { getMyEnrollments } from "../../../services/courseService";
+import {
+  getMyEnrollments,
+  unenrollFromCourse,
+} from "../../../services/courseService";
 import useAuth from "../../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import LogoutButton from "../../../components/common/LogoutButton/LogoutButton";
 
 function DashboardPage() {
   const { user } = useAuth();
   const [courses, setCourses] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getMyEnrollments();
-        console.log("Enrolled Courses:", data);
-        setCourses(data);
-      } catch (err) {
-        console.error("Error fetching enrollments:", err);
-      }
+  const fetchEnrollments = async () => {
+    try {
+      const data = await getMyEnrollments();
+      setCourses(data);
+    } catch (err) {
+      console.error("Error fetching enrollments:", err);
     }
-    fetchData();
+  };
+
+  useEffect(() => {
+    fetchEnrollments();
   }, []);
+
+  const handleUnenrollSuccess = (courseId) => {
+    setCourses((prev) =>
+      prev.filter((c) => c.id !== courseId && c.course_id !== courseId)
+    );
+  };
 
   const avatarUrl = user?.avatar
     ? `/${user.avatar}`
@@ -40,7 +47,11 @@ function DashboardPage() {
           <p>You are not enrolled in any courses yet.</p>
         ) : (
           courses.map((course) => (
-            <CourseCard key={course.id} course={course} />
+            <CourseCard
+              key={course.id || course.course_id}
+              course={course}
+              onUnenrollSuccess={handleUnenrollSuccess}
+            />
           ))
         )}
       </div>
