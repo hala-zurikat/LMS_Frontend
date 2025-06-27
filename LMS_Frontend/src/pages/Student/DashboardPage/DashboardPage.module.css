@@ -67,8 +67,14 @@
 .headerSection {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between; /* زر على اليمين، الترحيب على اليسار */
   margin-bottom: 1.5rem;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .avatar {

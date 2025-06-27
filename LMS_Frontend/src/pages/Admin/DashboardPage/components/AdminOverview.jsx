@@ -1,7 +1,7 @@
-// src/pages/Admin/AdminDashboardPage/components/AdminOverview.jsx
 import React, { useEffect, useState } from "react";
 import { getAdminStats } from "../../../../services/adminService";
 import Chart from "../../../../components/common/Chart";
+import LogoutButton from "../../../../components/common/LogoutButton/LogoutButton";
 import styles from "./AdminOverview.module.css";
 
 export default function AdminOverview() {
@@ -26,7 +26,10 @@ export default function AdminOverview() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Platform Statistics</h2>
+      <div className={styles.headerRow}>
+        <h2 className={styles.heading}>Platform Statistics</h2>
+        <LogoutButton />
+      </div>
 
       <div className={styles.statsGrid}>
         <div className={styles.card}>

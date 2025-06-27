@@ -8,8 +8,7 @@ export async function getSubmissionsByUserId(userId) {
   const res = await api.get(`/submissions/user/${userId}`);
   return res.data;
 }
-
 export async function updateSubmissionStatus(submissionId, statusData) {
-  const res = await api.put(`/submissions/${submissionId}/status`, statusData);
+  const res = await api.put(`/submissions/${submissionId}`, statusData);
   return res.data;
 }

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getInstructorStats } from "../../../../services/instructorService";
 import Chart from "../../../../components/common/Chart";
 import styles from "./InstructorOverview.module.css";
+import LogoutButton from "../../../../components/common/LogoutButton/LogoutButton.jsx";
 
 export default function InstructorOverview() {
   const [stats, setStats] = useState(null);
@@ -17,7 +18,6 @@ export default function InstructorOverview() {
 
   if (!stats) return <p>Loading instructor statistics...</p>;
 
-  // البيانات الخاصة بالمخطط مبنية على coursesProgress
   const chartData = (stats.coursesProgress || []).map((course) => ({
     name: course.name,
     enrolled: course.progress,
@@ -25,7 +25,11 @@ export default function InstructorOverview() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Instructor Overview</h2>
+      {/* ✅ زر تسجيل الخروج في الأعلى */}
+      <div className={styles.header}>
+        <h2 className={styles.heading}>Instructor Overview</h2>
+        <LogoutButton />
+      </div>
 
       <div className={styles.statsGrid}>
         <div className={styles.card}>
@@ -42,7 +46,6 @@ export default function InstructorOverview() {
         </div>
       </div>
 
-      {/* المخطط البياني الذي يعرض عدد الطلاب المسجلين لكل كورس */}
       <Chart
         data={chartData}
         dataKey="enrolled"
